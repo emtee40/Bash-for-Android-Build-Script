@@ -81,7 +81,7 @@ $CHECK && check_patches
 [[ $(wget -S --spider https://dl.google.com/android/repository/android-ndk-$NDK-linux-x86_64.zip 2>&1 | grep 'HTTP/1.1 200 OK') ]] || { echored "Invalid Android NDK! Check this:https://developer.android.com/ndk/downloads/ for latest versions!"; usage; }
 [ -z $VER ] && VER=4.4
 [[ $(wget -S --spider http://mirrors.kernel.org/gnu/bash/bash-$VER.tar.gz 2>&1 | grep 'HTTP/1.1 200 OK') ]] || { echored "Invalid Bash VER! Check this: http://mirrors.kernel.org/gnu/bash/ for valid versions!"; usage; }
-PVER=$(echo $VER | sed 's/.//')
+PVER=$(echo $VER | sed 's/\.//')
 [ -z $ARCH ] && ARCH=arm
 case $ARCH in
   arm64|aarch64) target_host=aarch64-linux-android;;
