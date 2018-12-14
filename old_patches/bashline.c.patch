@@ -1,0 +1,24 @@
+--- ../bash-4.4/bashline.c	Fri Dec 14 00:56:35 2018
++++ bashline.c	Fri Dec 14 10:14:22 2018
+@@ -20,6 +20,12 @@
+ 
+ #include "config.h"
+ 
++/* those 3 are meaningless on Android, see libc/include/grp.h in
++   bionic */
++struct group *getgrent(void) { return NULL; }
++void setgrent() {}
++void endgrent() {}
++
+ #if defined (READLINE)
+ 
+ #include "bashtypes.h"
+@@ -2465,7 +2471,7 @@
+      const char *text;
+      int state;
+ {
+-#if defined (__WIN32__) || defined (__OPENNT) || !defined (HAVE_GRP_H)
++#if defined (__WIN32__) || defined (__OPENNT) || defined(__ANDROID__) || !defined (HAVE_GRP_H)
+   return ((char *)NULL);
+ #else
+   static char *gname = (char *)NULL;
