@@ -59,6 +59,9 @@ setup_bash() {
   tar -xf bash-$VER.tar.gz
 }
 
+TEXTRESET=$(tput sgr0)
+TEXTGREEN=$(tput setaf 2)
+TEXTRED=$(tput setaf 1)
 DIR=`pwd`
 CHECK=false
 OIFS=$IFS; IFS=\|; 
@@ -120,7 +123,7 @@ apply_patches
 # Configure - valid arguments found from termux-packages and bash-on-android github repos 
 echogreen "Configuring"
 ./configure --host=$target_host --disable-nls --enable-static-link --without-bash-malloc bash_cv_dev_fd=whacky bash_cv_getcwd_malloc=yes --enable-multibyte --prefix=/system
-[ $? -eq 0 ] && { echored "Configure failed!"; exit 1; }
+[ $? -eq 0 ] || { echored "Configure failed!"; exit 1; }
 
 # Build bash
 echogreen "Building"
