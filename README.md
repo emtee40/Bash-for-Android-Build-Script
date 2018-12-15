@@ -4,9 +4,9 @@ A script that patches & cross-compiles bash for Android
 
 ## Prerequisites
 
-* Android NDK (tested w/ r18b)
 * Linux or Linux WSL on W10 (tested on Ubuntu WSL on W10 Pro)
 * GNU Make
+* Common sense
 
 ## Compile
 
