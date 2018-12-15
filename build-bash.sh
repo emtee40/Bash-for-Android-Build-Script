@@ -114,8 +114,7 @@ export LD=$target_host-ld
 export STRIP=$target_host-strip
 
 # Tell configure what flags Android requires.
-export CFLAGS="-fPIE -fPIC"
-export LDFLAGS="-pie -s"
+export LDFLAGS="-static -s"
 
 # Apply bash patches - Android patches originally by Alexander Gromnitsky, ATechnoHazard, koro666, and Termux @Github
 apply_patches
