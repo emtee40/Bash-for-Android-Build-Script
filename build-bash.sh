@@ -103,7 +103,7 @@ echogreen "Setting Up Android NDK $NDK"
 python android-ndk-$NDK/build/tools/make_standalone_toolchain.py --arch $ARCH --api $API --install-dir Toolchains --force
 
 # Add the standalone toolchain to the search path.
-export PATH=$PATH:`pwd`/Toolchains/bin
+export PATH=$PATH:$DIR/bash_android/Toolchains/bin
 
 # Tell configure what tools to use.
 export AR=$target_host-ar
