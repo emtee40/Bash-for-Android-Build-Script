@@ -15,6 +15,7 @@ usage () {
   echogreen "VER=      (Default: 4.4)"
   echogreen "ARCH=     (Default: arm) (Valid Arch values: arm, arm64, aarch64, x86, i686, x86_64)"
   echogreen "API=      (Default: 21)"
+  echored "Note that the minimum API for arch64 and x86_64 is 21 (Lollipop)!"
   echored "Note that case insensitive file systems such as NTFS will have files overwritten during NDK extraction!"
   echored "It's recommended to use a case senstivie file system such as ext4 instead although this has seemingly no impact in this case"
   echo " "
@@ -101,6 +102,7 @@ echogreen "Fetching Android NDK $NDK"
 [ -d "android-ndk-$NDK" ] || unzip -o android-ndk-$NDK-linux-x86_64.zip
 echogreen "Setting Up Android NDK $NDK"
 python android-ndk-$NDK/build/tools/make_standalone_toolchain.py --arch $ARCH --api $API --install-dir Toolchains --force
+[ $? -ne 0 ] && { echored "Error in NDK Setup!"; exit 1; }
 
 # Add the standalone toolchain to the search path.
 export PATH=$PATH:$DIR/bash_android/Toolchains/bin
