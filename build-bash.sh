@@ -80,7 +80,11 @@ IFS=$OIFS
 $CHECK && check_patches
 [ -z $NDK ] && NDK=r18b
 [[ $(wget -S --spider https://dl.google.com/android/repository/android-ndk-$NDK-linux-x86_64.zip 2>&1 | grep 'HTTP/1.1 200 OK') ]] || { echored "Invalid Android NDK! Check this:https://developer.android.com/ndk/downloads/ for latest versions!"; usage; }
-[ -z $VER ] && VER=4.4
+[ -z $VER ] && VER=5.0
+case $VER in
+  5*) mv -f $DIR/patches_5 $DIR/patches;;
+  *) mv -f $DIR/patches_4 $DIR/patches;;
+esac
 [[ $(wget -S --spider http://mirrors.kernel.org/gnu/bash/bash-$VER.tar.gz 2>&1 | grep 'HTTP/1.1 200 OK') ]] || { echored "Invalid Bash VER! Check this: http://mirrors.kernel.org/gnu/bash/ for valid versions!"; usage; }
 PVER=$(echo $VER | sed 's/\.//')
 [ -z $ARCH ] && ARCH=arm
